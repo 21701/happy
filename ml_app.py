@@ -8,23 +8,32 @@ def run_ml_app():
     st.subheader('Machine Learning 예측')
 
     # 1. 유저한테, 데이터를 입력받습니다.
-    gender = st.radio('성별을 입력하세요.',['남자','여자'])
-    if gender == '남자' :
-        gender_number = 1
-    elif gender == '여자' :
-        gender_number = 0
+    rank = st.number_input('Happiness Rank',min_value=1,max_value=158)
+  
+    bins = st.slider('Economy (GDP per Capita)',min_value=0.0,max_value=2.1)
+    gdp = bins
+    # st.number_input('Economy (GDP per Capita)',min_value=0.0,max_value=2.1)
+    health = st.number_input('Health (Life Expectancy)',min_value=0.0,max_value=1.2)
+    freedom = st.number_input('Freedom',min_value=0.0,max_value=1.2)
+    generosity = st.number_input('Generosity',min_value=0.0,max_value=1.0)
+    
+    # gender = st.radio('성별을 입력하세요.',['남자','여자'])
+    # if gender == '남자' :
+    #     gender_number = 1
+    # elif gender == '여자' :
+    #     gender_number = 0
 
-    df = pd.read_csv('data/Car_Purchasing_Data.csv')
+    # df = pd.read_csv('data/Car_Purchasing_Data.csv')
 
-    age = st.number_input('나이 입력',min_value=1,max_value=120)
-    salary = st.number_input('연봉 입력',min_value=10000 )
-    debt = st.number_input('카드 빚 입력', min_value=0)
-    worth = st.number_input('자산 입력',min_value=10000)
+    # age = st.number_input('나이 입력',min_value=1,max_value=120)
+    # salary = st.number_input('연봉 입력',min_value=10000 )
+    # debt = st.number_input('카드 빚 입력', min_value=0)
+    # worth = st.number_input('자산 입력',min_value=10000)
     # print(debt)
     
     # 2. 모델에 예측한다.
     # 2-1 신규데이터를 넘파이로 만든다.
-    new_data = np.array([gender_number,age,salary,debt,worth])
+    new_data = np.array([rank,gdp,health,freedom,generosity])
     new_data = new_data.reshape(1,5)
 
     # 2-2 스케일러와 인공지능을 변수로 불러온다
@@ -51,4 +60,4 @@ def run_ml_app():
     y_pred = y_pred.round()
 
     if btn :
-        st.write('예측결과 {} 달러의 차를 살 수 있습니다.'.format(y_pred[0,0]))
+        st.write('< 예측 결과 > " 당신의 행복 지수는 {} 입니다. " '.format(y_pred[0,0]))
