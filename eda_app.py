@@ -73,7 +73,7 @@ def run_eda_app():
 
     # 고객의 이름을 검색할 수 있는 기능 개발
     # 1. 유저한테 검색어 입력을 받습니다.
-    st.subheader('사람검색')
+    st.subheader('국가 검색')
 
     word = st.text_input('검색어를 입력하세요')
     # 검색을 위해서 소문자로 만든다.
