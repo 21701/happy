@@ -6,11 +6,6 @@ import pickle
 from eda_app import run_eda_app
 from ml_app import run_ml_app
 
-[theme]
-base="dark"
-primaryColor="#523030"
-secondaryBackgroundColor="#5e659e"
-textColor="#c15252"
 
 
 
