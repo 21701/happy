@@ -18,7 +18,7 @@ def main() :
     # 사이드바 메뉴 
     st.sidebar.title('World Happiness Report')
 
-    menu = ['Home','EDA','Machine learning']
+    menu = ['Home','EDA','Machine Learning']
     choice = st.sidebar.selectbox('MENU',menu)
     
     if choice == 'Home':
@@ -53,7 +53,7 @@ def main() :
         
     elif choice == 'EDA':
         run_eda_app()
-    elif choice == 'Machine learning':
+    elif choice == 'Machine Learning':
         run_ml_app()
    
     

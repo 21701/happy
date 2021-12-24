@@ -130,6 +130,7 @@ def run_eda_app():
     st.subheader('\n')
     st.subheader('상관계수')
     # st.dataframe(df.corr())
+    
     df_corr = df.iloc[:, 3: ]
     selected_corr = st.multiselect('상관계수 컬럼을 선택하면 수치, 차트로 표시',df_corr.columns)
     
