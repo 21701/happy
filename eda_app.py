@@ -11,7 +11,7 @@ def run_eda_app():
     st.subheader('EDA')
     
      # 컬럼을 선택하면 해당 컬럼들만 데이터프레임 표시하는 화면
-    selected_columns = st.multiselect('선택한 컬럼들의 정보만 보여줍니다.',df.columns)
+    selected_columns = st.multiselect('Only the information of the selected columns is displayed.',df.columns)
     if len(selected_columns) != 0  :
         st.dataframe( df[selected_columns] )
     else :
@@ -22,13 +22,6 @@ def run_eda_app():
     if check :
         st.dataframe(df.describe())
     
-        
-    
-        
-    
-  
-        
-
     
     # 라디오버튼
     
@@ -48,21 +41,35 @@ def run_eda_app():
 
 
     
-    st.sidebar.write('나라별 최고행복 순위')
+    st.sidebar.subheader('최고 행복 순위')
     word = st.sidebar.text_input('국가명 검색')
     # 검색을 위해서 소문자로 만든다.
     word = word.lower() 
     # 2. 검색어를 데이터프레임의 Customer Name 컬럼에서 검색해서 가져온다.
-    
-    
     df_search = df.loc[ df['Country'].str.lower().str.contains(word) ,  ]
-    st.sidebar.dataframe(df_search.head(1))
+    print(df_search.iloc[:1,:1+1])
+    btn= st.sidebar.button('검색')
+    if btn:
+        st.sidebar.dataframe(df_search.iloc[:1,:1+1].head(1))
+        st.sidebar.write('" {}의 최고 순위는 {}위 입니다. "'.format(df_search['Country'].values[0],df_search['Happiness Rank'].values[0]))
+    else : st.write('검색어를 입력하면 순위가 나옵니다')
 
 
 
+  # # 고객의 이름을 검색할 수 있는 기능 개발
+    # # 1. 유저한테 검색어 입력을 받습니다.
+    # st.subheader('\n')
+    # st.subheader('나라를 검색하면 해당정보를 알려드립니다')
+
+    # word = st.text_input('검색어를 입력하세요')
+    # # 검색을 위해서 소문자로 만든다.
+    # word = word.lower() 
+    # # 2. 검색어를 데이터프레임의 Customer Name 컬럼에서 검색해서 가져온다.
+    # # print(word)
     
-    # 고객의 이름을 검색할 수 있는 기능 개발
-    # 1. 유저한테 검색어 입력을 받습니다.
+    # df_search = df.loc[ df['Country'].str.lower().str.contains(word) ,  ]
+    # st.dataframe(df_search)
+
     
     
 
