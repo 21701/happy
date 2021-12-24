@@ -6,28 +6,66 @@ import seaborn as sns
 
 def run_eda_app():
 
-  
-        
-    
+
     df = pd.read_csv('data/happy.csv',index_col=0)
     st.subheader('EDA')
+    
+     # 컬럼을 선택하면 해당 컬럼들만 데이터프레임 표시하는 화면
+    selected_columns = st.multiselect('선택한 컬럼들의 정보만 보여줍니다.',df.columns)
+    if len(selected_columns) != 0  :
+        st.dataframe( df[selected_columns] )
+    else :
+        st.dataframe(df)
+        # st.write('< 선택한 컬럼 표시 >')
+    check = st.checkbox('Statistics')
 
+    if check :
+        st.dataframe(df.describe())
+    
+        
+    
+        
+    
+  
+        
+
+    
+    # 라디오버튼
+    
     radio_menu = ['DataFrame','Statistics']
     selected_radio = st.radio('Select',radio_menu)
-    
     if selected_radio == 'DataFrame':
         st.dataframe(df)
     elif selected_radio == 'Statistics':
         st.dataframe(df.describe())
-    
 
-    
-    # 컬럼을 선택하면 해당 컬럼들만 데이터프레임 표시하는 화면
-    print(df.columns)
     st.subheader('\n')
 
     
    
+
+    st.subheader('\n')
+
+
+    
+    st.sidebar.write('나라별 최고행복 순위')
+    word = st.sidebar.text_input('국가명 검색')
+    # 검색을 위해서 소문자로 만든다.
+    word = word.lower() 
+    # 2. 검색어를 데이터프레임의 Customer Name 컬럼에서 검색해서 가져온다.
+    
+    
+    df_search = df.loc[ df['Country'].str.lower().str.contains(word) ,  ]
+    st.sidebar.dataframe(df_search.head(1))
+
+
+
+    
+    # 고객의 이름을 검색할 수 있는 기능 개발
+    # 1. 유저한테 검색어 입력을 받습니다.
+    
+    
+
 
 
 
@@ -40,19 +78,23 @@ def run_eda_app():
     # print(df.columns)
     # print(df.dtypes != object)
     # print( df.columns[df.dtypes != object])
+    
+
+
     st.subheader('\n')
+
     st.subheader('선택한 컬럼의 최소값, 최대값 정보')
     number_columns = df.columns[df.dtypes != object]
 
     selected_minmax_column = st.selectbox('컬럼 선택',number_columns)
     
-    # 선택한 컬럼의 최소값에 해당되는 사람의 데이터 출력
-    # df[selected_minmax_column] == df[selected_minmax_column].min()
+    # # 선택한 컬럼의 최소값에 해당되는 사람의 데이터 출력
+    df[selected_minmax_column] == df[selected_minmax_column].min()
     min_data = df.loc[df[selected_minmax_column] == df[selected_minmax_column].min(),]
     st.dataframe(min_data)
 
 
-    # 선택한 컬럼의 최대값에 해당되는 사람의 데이터 출력
+    # # 선택한 컬럼의 최대값에 해당되는 사람의 데이터 출력
     max_data = df.loc[df[selected_minmax_column] == df[selected_minmax_column].max(),]
     st.dataframe(max_data)
 
@@ -60,19 +102,19 @@ def run_eda_app():
     
     
 
-    # 고객의 이름을 검색할 수 있는 기능 개발
-    # 1. 유저한테 검색어 입력을 받습니다.
-    st.subheader('\n')
-    st.subheader('나라를 검색하면 해당정보를 알려드립니다')
+    # # 고객의 이름을 검색할 수 있는 기능 개발
+    # # 1. 유저한테 검색어 입력을 받습니다.
+    # st.subheader('\n')
+    # st.subheader('나라를 검색하면 해당정보를 알려드립니다')
 
-    word = st.text_input('검색어를 입력하세요')
-    # 검색을 위해서 소문자로 만든다.
-    word = word.lower() 
-    # 2. 검색어를 데이터프레임의 Customer Name 컬럼에서 검색해서 가져온다.
-    # print(word)
+    # word = st.text_input('검색어를 입력하세요')
+    # # 검색을 위해서 소문자로 만든다.
+    # word = word.lower() 
+    # # 2. 검색어를 데이터프레임의 Customer Name 컬럼에서 검색해서 가져온다.
+    # # print(word)
     
-    df_search = df.loc[ df['Country'].str.lower().str.contains(word) ,  ]
-    st.dataframe(df_search)
+    # df_search = df.loc[ df['Country'].str.lower().str.contains(word) ,  ]
+    # st.dataframe(df_search)
 
 
     # 3. 화면에 결과를 보여준다.

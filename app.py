@@ -25,7 +25,7 @@ def main() :
        
         st.header('Happiness scored according to economic production, social support, etc.')
         st.subheader('\n')
-        st.subheader('- Data Columns Information')
+        st.subheader('Data Columns Information')
         df = pd.read_csv('data/happy.csv',index_col=0)
         st.dataframe(df)
         
@@ -35,14 +35,7 @@ def main() :
         st.write('* Economy (GDP per Capita) : The extent to which GDP contributes to the calculation of the Happiness Score.')
         st.write('* Health (Life Expectancy) : The extent to which Life expectancy contributed to the calculation of the Happiness Score.')
         st.write('* Freedom : The extent to which Freedom contributed to the calculation of the Happiness Score.')
-        st.subheader('\n')
-        selected_columns = st.multiselect('선택한 컬럼의 정보만 보여줍니다.',df.columns)
-        if len(selected_columns) != 0 :
-            st.dataframe( df[selected_columns] )
         
-
-        else :
-             st.write('선택한 컬럼이 없습니다.')
         
 
         # selected_column = st.selectbox('컬럼을 선택하세요', df.columns)
