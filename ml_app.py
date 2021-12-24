@@ -5,22 +5,28 @@ import joblib
 
 
 def run_ml_app():
-    st.subheader('Machine Learning 예측')
+    st.subheader('Machine Learning')
+    st.subheader('\n')
 
     # 1. 유저한테, 데이터를 입력받습니다.
-    rank = st.number_input('Happiness Rank',min_value=1,max_value=158)
+    rank = st.number_input('Happiness Rank : Rank of the country based on the Happiness Score.',min_value=1,max_value=158)
+    st.write('\n')
   
-    gdp_slider = st.slider('Economy (GDP per Capita)',min_value=0.0,max_value=2.1)
+    gdp_slider = st.slider('Economy (GDP per Capita) : The extent to which GDP contributes to the calculation of the Happiness Score.',min_value=0.0,max_value=2.1)
     gdp = gdp_slider
+    st.write('\n')
 
-    health_slider = st.slider('Health (Life Expectancy)',min_value=0.0,max_value=1.2)
+    health_slider = st.slider('Health (Life Expectancy) : The extent to which Life expectancy contributed to the calculation of the Happiness Score.',min_value=0.0,max_value=1.2)
     health = health_slider
+    st.write('\n')
 
-    freedom_slider = st.slider('Freedom',min_value=0.0,max_value=1.2)
+    freedom_slider = st.slider('Freedom : The extent to which Freedom contributed to the calculation of the Happiness Score.',min_value=0.0,max_value=1.2)
     freedom = freedom_slider
+    st.write('\n')
 
     generosity_slider = st.slider('Generosity',min_value=0.0,max_value=1.0)
     generosity = generosity_slider
+    st.write('\n')
     
     # gender = st.radio('성별을 입력하세요.',['남자','여자'])
     # if gender == '남자' :
