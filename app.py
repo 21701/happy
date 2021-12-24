@@ -16,7 +16,7 @@ def main() :
 
 
     # 사이드바 메뉴 
-    st.sidebar.title('World Happiness Report')
+    st.sidebar.title('World Happiness Report.')
 
     menu = ['Home','EDA','Machine learning']
     choice = st.sidebar.selectbox('MENU',menu)

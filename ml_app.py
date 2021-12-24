@@ -9,7 +9,7 @@ def run_ml_app():
     st.subheader('\n')
 
     # 1. 유저한테, 데이터를 입력받습니다.
-    rank = st.number_input('Happiness Rank : Rank of the country based on the Happiness Score.',min_value=1,max_value=158)
+    rank = st.number_input('Happiness Rank : Rank of the country based on the Happiness Score1.',min_value=1,max_value=158)
     st.write('\n')
   
     gdp_slider = st.slider('Economy (GDP per Capita) : The extent to which GDP contributes to the calculation of the Happiness Score.',min_value=0.0,max_value=2.1)
