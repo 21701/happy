@@ -3,14 +3,13 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-
+import time
 def run_eda_app():
-
 
     df = pd.read_csv('data/happy.csv',index_col=0)
     st.subheader('EDA')
     
-     # 컬럼을 선택하면 해당 컬럼들만 데이터프레임 표시하는 화면
+    # 컬럼을 선택하면 해당 컬럼들만 데이터프레임 표시하는 화면
     selected_columns = st.multiselect('Only the information of the selected columns is displayed.',df.columns)
     if len(selected_columns) != 0  :
         st.dataframe( df[selected_columns] )
@@ -21,26 +20,11 @@ def run_eda_app():
 
     if check :
         st.dataframe(df.describe())
-    
-    
-    # 라디오버튼
-    
-    radio_menu = ['DataFrame','Statistics']
-    selected_radio = st.radio('Select',radio_menu)
-    if selected_radio == 'DataFrame':
-        st.dataframe(df)
-    elif selected_radio == 'Statistics':
-        st.dataframe(df.describe())
 
-    st.subheader('\n')
-
-    
-   
 
     st.subheader('\n')
 
 
-    
     st.sidebar.subheader('최고 행복 순위')
     word = st.sidebar.text_input('국가명 검색')
     # 검색을 위해서 소문자로 만든다.
@@ -48,15 +32,21 @@ def run_eda_app():
     # 2. 검색어를 데이터프레임의 Customer Name 컬럼에서 검색해서 가져온다.
     df_search = df.loc[ df['Country'].str.lower().str.contains(word) ,  ]
     print(df_search.iloc[:1,:1+1])
-    btn= st.sidebar.button('검색')
+    btn= st.sidebar.button('Search')
     if btn:
-        st.sidebar.dataframe(df_search.iloc[:1,:1+1].head(1))
-        st.sidebar.write('" {}의 최고 순위는 {}위 입니다. "'.format(df_search['Country'].values[0],df_search['Happiness Rank'].values[0]))
-    else : st.write('검색어를 입력하면 순위가 나옵니다')
+        if len(word) != 0 :
+            
+            st.sidebar.dataframe(df_search.iloc[:1,:1+1].head(1))
+            st.sidebar.success('" {}의 최고 순위는 {}위 입니다. "'.format(df_search['Country'].values[0],df_search['Happiness Rank'].values[0]))
+        else : st.sidebar.warning('검색어를 입력하세요')
 
 
 
-  # # 고객의 이름을 검색할 수 있는 기능 개발
+
+#  
+    
+
+# # 고객의 이름을 검색할 수 있는 기능 개발
     # # 1. 유저한테 검색어 입력을 받습니다.
     # st.subheader('\n')
     # st.subheader('나라를 검색하면 해당정보를 알려드립니다')
@@ -69,11 +59,6 @@ def run_eda_app():
     
     # df_search = df.loc[ df['Country'].str.lower().str.contains(word) ,  ]
     # st.dataframe(df_search)
-
-    
-    
-
-
 
 
 
@@ -138,13 +123,32 @@ def run_eda_app():
     if len(selected_corr) > 0 :
         st.dataframe(df_corr[selected_corr].corr())
 
-        # 상관계수를 수치로도 구하고, 차트로도 표시하라.
+    # 상관계수를 수치로도 구하고, 차트로도 표시하라.
         
         fig = sns.pairplot(data=df_corr[selected_corr] )
         st.pyplot(fig)
+        #--------------------
+        fig2 = sns.jointplot(data=df_corr[selected_corr], kind="kde")
+        plt.suptitle("꽃받침의 길이와 넓이의 Joint Plot 과 Kernel Density Plot", y=1.02)
+        st.pyplot(fig2)
+
     # 유저가 컬럼을 선택하지 않은 경우
     else :
         st.write('선택한 컬럼이 없습니다.')
+#-----------------------------
+
+
+
+    
+
+
+
+
+
+
+
+
+
 
     # fig1 = plt.figure()
     # plt.figure(figsize=(10,8))

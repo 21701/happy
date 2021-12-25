@@ -23,7 +23,7 @@ def main() :
     
     if choice == 'Home':
        
-        st.header('Happiness scored according to economic production, social support, etc.')
+        st.subheader('Happiness scored according to economic production, social support, etc.')
         st.subheader('\n')
         st.subheader('Data Columns Information')
         df = pd.read_csv('data/happy.csv',index_col=0)

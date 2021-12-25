@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import joblib
+import time
 
 
 def run_ml_app():
@@ -71,4 +72,18 @@ def run_ml_app():
     y_pred = y_pred.round()
 
     if btn :
-        st.write('< 예측 결과 > " 당신의 행복 지수는 {} 입니다. " '.format(y_pred[0,0]))
+        progress_bar = st.sidebar.progress(0)
+        status_text = st.sidebar.empty()
+        for i in range(1, 101):
+
+            status_text.text("%i%% Complete" % i)
+       
+            progress_bar.progress(i)
+        
+            time.sleep(0.03)
+
+            progress_bar.empty()
+            if i == 100:
+                st.success('< 예측 결과 > " 당신의 행복 지수는 {} 입니다. " '.format(y_pred[0,0]))
+
+               
