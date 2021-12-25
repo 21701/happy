@@ -21,7 +21,9 @@ def main() :
     menu = ['Home','EDA','Machine Learning']
     choice = st.sidebar.selectbox('MENU',menu)
     
+    
     if choice == 'Home':
+        st.sidebar.success('choice on the menu')
        
         st.subheader('Happiness scored according to economic production, social support, etc.')
         st.subheader('\n')
@@ -55,7 +57,8 @@ def main() :
         run_eda_app()
     elif choice == 'Machine Learning':
         run_ml_app()
-   
+    
+        
     
 
 

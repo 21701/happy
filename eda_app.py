@@ -31,15 +31,43 @@ def run_eda_app():
     word = word.lower() 
     # 2. 검색어를 데이터프레임의 Customer Name 컬럼에서 검색해서 가져온다.
     df_search = df.loc[ df['Country'].str.lower().str.contains(word) ,  ]
-    print(df_search.iloc[:1,:1+1])
+    # print(df_search.iloc[:1,:1+1])
     btn= st.sidebar.button('Search')
     if btn:
-        if len(word) != 0 :
+        
+        
             
+            
+        if len(word) != 0 :
+            progress_bar = st.sidebar.progress(0)
+            status_text = st.sidebar.empty()
+
+            for i in range(1, 101):
+                complete=status_text.text("%i%% Complete" % i)
+                st.sidebar.empty()
+                progress_bar.progress(i)
+                time.sleep(0.01)
+                progress_bar.empty()
+                
             st.sidebar.dataframe(df_search.iloc[:1,:1+1].head(1))
             st.sidebar.success('" {}의 최고 순위는 {}위 입니다. "'.format(df_search['Country'].values[0],df_search['Happiness Rank'].values[0]))
-        else : st.sidebar.warning('검색어를 입력하세요')
+            check2 = st.sidebar.checkbox('{}의 모든 순위 확인'.format(df_search['Country'].values[0]))
+            if check2 :
+                st.sidebar.dataframe(df_search.iloc[:,:1+1])
+            
+        else :
+            st.sidebar.warning('검색어를 입력하세요')
+            
+            
+        
+    # print(df_search.iloc[:,:1+1])
+        #     st.sidebar.dataframe(df_search.iloc[:,:1+1])
+        # else :
+        #     check2.empty()
+        
 
+  
+    
 
 
 
@@ -116,7 +144,7 @@ def run_eda_app():
     st.subheader('상관계수')
     # st.dataframe(df.corr())
     
-    df_corr = df.iloc[:, 3: ]
+    df_corr = df.iloc[:, 1: ]
     selected_corr = st.multiselect('상관계수 컬럼을 선택하면 수치, 차트로 표시',df_corr.columns)
     
     # 유저가 1개라도 컬럼을 선택했을 경우
