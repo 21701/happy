@@ -4,6 +4,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import time
+
+
 def run_eda_app():
 
     df = pd.read_csv('data/happy.csv',index_col=0)
@@ -51,9 +53,16 @@ def run_eda_app():
                 
             st.sidebar.dataframe(df_search.iloc[:1,:1+1].head(1))
             st.sidebar.success('" {}의 최고 순위는 {}위 입니다. "'.format(df_search['Country'].values[0],df_search['Happiness Rank'].values[0]))
-            check2 = st.sidebar.checkbox('{}의 모든 순위 확인'.format(df_search['Country'].values[0]))
-            if check2 :
-                st.sidebar.dataframe(df_search.iloc[:,:1+1])
+            # check2 = st.sidebar.checkbox('{}의 모든 순위 확인'.format(df_search['Country'].values[0]))
+            # if check2 :
+            #     run_eda_app2()
+
+
+
+            
+            
+            # if check2 :
+                # st.sidebar.dataframe(df_search.iloc[:,:1+1].head())
             
         else :
             st.sidebar.warning('검색어를 입력하세요')
