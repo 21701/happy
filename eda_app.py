@@ -218,7 +218,8 @@ def run_eda_app():
     st.subheader('상관계수')
     # st.dataframe(df.corr())
     
-    df_corr = df.iloc[:, 1: ]
+    df_corr = df.iloc[:, 2: ]
+    # print(df_corr['Happiness Rank'].unique())
     selected_corr = st.multiselect('상관계수 컬럼을 선택하면 수치, 차트로 표시',df_corr.columns)
     
     # 유저가 1개라도 컬럼을 선택했을 경우
@@ -226,9 +227,9 @@ def run_eda_app():
         st.dataframe(df_corr[selected_corr].corr())
 
     # 상관계수를 수치로도 구하고, 차트로도 표시하라.
-        df_corr = df_corr[selected_corr]
-        fig4 = sns.pairplot(data=df_corr)
-        st.pyplot(fig4)
+        
+        fig1 = sns.pairplot(data=df_corr[selected_corr])
+        st.pyplot(fig1)
         #--------------------
         # fig2 = sns.jointplot(data=df_corr[selected_corr], kind="kde")
         # plt.suptitle("꽃받침의 길이와 넓이의 Joint Plot 과 Kernel Density Plot", y=1.02)
