@@ -173,7 +173,7 @@ def run_eda_app():
     
     df_corr = df.iloc[:, 1: ]
     # print(df_corr['Happiness Rank'].unique())
-    selected_corr = st.multiselect('상관계수 컬럼을 선택하면 수치 표시',df_corr.columns)
+    selected_corr = st.multiselect('상관계수 컬럼을 선택하면 수치 표시1',df_corr.columns)
     
     # 유저가 1개라도 컬럼을 선택했을 경우
     if len(selected_corr) > 0 :
