@@ -9,7 +9,7 @@ import time
 def run_eda_app():
 
     df = pd.read_csv('data/happy.csv',index_col=0)
-    st.subheader('EDA.')
+    st.subheader('EDA')
 
     #-----------------------------------
     # import altair as alt
