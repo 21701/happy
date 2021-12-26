@@ -82,7 +82,7 @@ def run_eda_app():
         st.dataframe(df.describe())
 
 
-    st.subheader('\n')
+    st.sidebar.title('\n')
 
 
     st.sidebar.subheader('최고 행복 순위')
@@ -166,7 +166,33 @@ def run_eda_app():
     # print(df.dtypes != object)
     # print( df.columns[df.dtypes != object])
     
+  # 상관관계 분석을 위한, 상관계수 보여주는 화면 개발
+    st.subheader('\n')
+    st.subheader('상관계수')
+    # st.dataframe(df.corr())
+    
+    df_corr = df.iloc[:, 1: ]
+    # print(df_corr['Happiness Rank'].unique())
+    selected_corr = st.multiselect('상관계수 컬럼을 선택하면 수치 표시',df_corr.columns)
+    
+    # 유저가 1개라도 컬럼을 선택했을 경우
+    if len(selected_corr) > 0 :
+        st.dataframe(df_corr[selected_corr].corr())
 
+    # 상관계수를 수치로도 구하고, 차트로도 표시하라.
+        
+        # fig1 = sns.pairplot(data=df_corr[selected_corr])
+        # st.pyplot(fig1)
+        #--------------------
+        # fig2 = sns.jointplot(data=df_corr[selected_corr], kind="kde")
+        # plt.suptitle("꽃받침의 길이와 넓이의 Joint Plot 과 Kernel Density Plot", y=1.02)
+        # st.pyplot(fig2)
+        
+    # 유저가 컬럼을 선택하지 않은 경우
+    else :
+        st.success('컬럼을 선택해주세요')
+        
+#-----------------------------
 
     st.subheader('\n')
 
@@ -213,33 +239,7 @@ def run_eda_app():
 
     # 3. 화면에 결과를 보여준다.
     
-    # 상관관계 분석을 위한, 상관계수 보여주는 화면 개발
-    st.subheader('\n')
-    st.subheader('상관계수')
-    # st.dataframe(df.corr())
-    
-    df_corr = df.iloc[:, 1: ]
-    # print(df_corr['Happiness Rank'].unique())
-    selected_corr = st.multiselect('상관계수 컬럼을 선택하면 수치 표시',df_corr.columns)
-    
-    # 유저가 1개라도 컬럼을 선택했을 경우
-    if len(selected_corr) > 0 :
-        st.dataframe(df_corr[selected_corr].corr())
-
-    # 상관계수를 수치로도 구하고, 차트로도 표시하라.
-        
-        # fig1 = sns.pairplot(data=df_corr[selected_corr])
-        # st.pyplot(fig1)
-        #--------------------
-        # fig2 = sns.jointplot(data=df_corr[selected_corr], kind="kde")
-        # plt.suptitle("꽃받침의 길이와 넓이의 Joint Plot 과 Kernel Density Plot", y=1.02)
-        # st.pyplot(fig2)
-        
-    # 유저가 컬럼을 선택하지 않은 경우
-    else :
-        st.warning('컬럼을 선택해주세요')
-        
-#-----------------------------
+  
 
 
 
