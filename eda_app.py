@@ -226,9 +226,9 @@ def run_eda_app():
         st.dataframe(df_corr[selected_corr].corr())
 
     # 상관계수를 수치로도 구하고, 차트로도 표시하라.
-        df = df.loc[:,~df.columns.duplicated()]
-        fig = sns.pairplot(data=df_corr[selected_corr] )
-        st.pyplot(fig)
+        df_corr = df_corr[selected_corr]
+        fig4 = sns.pairplot(data=df_corr)
+        st.pyplot(fig4)
         #--------------------
         # fig2 = sns.jointplot(data=df_corr[selected_corr], kind="kde")
         # plt.suptitle("꽃받침의 길이와 넓이의 Joint Plot 과 Kernel Density Plot", y=1.02)
