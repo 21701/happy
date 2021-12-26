@@ -10,7 +10,65 @@ def run_eda_app():
 
     df = pd.read_csv('data/happy.csv',index_col=0)
     st.subheader('EDA')
+
+    #-----------------------------------
+    # import altair as alt
+    # from urllib.error import URLError
+
+    # @st.cache
+    # def get_UN_data():
+        
     
+    #     return df.set_index("Country")
+    # try:
+    #     df = get_UN_data()
+    #     countries = st.multiselect(
+    #         "Choose countries", list(df.index), ["China", "Denmark"]
+    #     )
+    #     if not countries:
+    #         st.error("Please select at least one country.")
+    #     else:
+    #         data = df.loc[countries]
+        
+    #         data /= 1000000.0
+    #         st.write("### Gross Agricultural Production ($B)", data.sort_index())
+
+    #         data = data.T.reset_index()
+    #         data = pd.melt(data, id_vars=["index"]).rename(
+    #             columns={"index": "year", "value": "Gross Agricultural Product ($B)"}
+    #         )
+    #         chart = (
+    #             alt.Chart(data)
+    #             .mark_area(opacity=0.3)
+    #             .encode(
+    #                 x="year:T",
+    #                 y=alt.Y("Gross Agricultural Product ($B):Q", stack=None),
+    #                 color="Region:N",
+    #             )
+    #         )
+    #         st.altair_chart(chart, use_container_width=True)
+    # except URLError as e:
+    #     st.error(
+    #         """
+    #         **This demo requires internet access.**
+
+    #         Connection error: %s
+    #     """
+    #         % e.reason
+    #     )
+    
+
+
+
+
+
+
+
+
+
+
+
+
     # 컬럼을 선택하면 해당 컬럼들만 데이터프레임 표시하는 화면
     selected_columns = st.multiselect('Only the information of the selected columns is displayed.',df.columns)
     if len(selected_columns) != 0  :
@@ -55,7 +113,7 @@ def run_eda_app():
             st.sidebar.success('" {}의 최고 순위는 {}위 입니다. "'.format(df_search['Country'].values[0],df_search['Happiness Rank'].values[0]))
             # check2 = st.sidebar.checkbox('{}의 모든 순위 확인'.format(df_search['Country'].values[0]))
             # if check2 :
-            #     run_eda_app2()
+            #     st.sidebar.dataframe(df_search.iloc[:,:1+1].head())
 
 
 
@@ -127,6 +185,13 @@ def run_eda_app():
     max_data = df.loc[df[selected_minmax_column] == df[selected_minmax_column].max(),]
     st.dataframe(max_data)
 
+    # fig = sns.pairplot(data=min_data )
+    # st.pyplot(fig)
+    # fig = sns.boxplot(x=min_data, y=max_data, data=selected_minmax_column)
+   
+    # st.pyplot(fig)
+
+
     
     
     
@@ -165,13 +230,13 @@ def run_eda_app():
         fig = sns.pairplot(data=df_corr[selected_corr] )
         st.pyplot(fig)
         #--------------------
-        fig2 = sns.jointplot(data=df_corr[selected_corr], kind="kde")
-        plt.suptitle("꽃받침의 길이와 넓이의 Joint Plot 과 Kernel Density Plot", y=1.02)
-        st.pyplot(fig2)
+        # fig2 = sns.jointplot(data=df_corr[selected_corr], kind="kde")
+        # plt.suptitle("꽃받침의 길이와 넓이의 Joint Plot 과 Kernel Density Plot", y=1.02)
+        # st.pyplot(fig2)
 
     # 유저가 컬럼을 선택하지 않은 경우
     else :
-        st.write('선택한 컬럼이 없습니다.')
+        st.warning('컬럼을 선택해주세요')
 #-----------------------------
 
 
