@@ -38,6 +38,8 @@ def main() :
         st.write('* Health (Life Expectancy) : The extent to which Life expectancy contributed to the calculation of the Happiness Score.')
         st.write('* Freedom : The extent to which Freedom contributed to the calculation of the Happiness Score.')
         
+        st.title('\n')
+        dataset_source=st.write( 'Dataset Source - '+' '+' https://www.kaggle.com/unsdsn/world-happiness ')
         
 
         # selected_column = st.selectbox('컬럼을 선택하세요', df.columns)

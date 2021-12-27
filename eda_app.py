@@ -76,7 +76,7 @@ def run_eda_app():
     else :
         st.dataframe(df)
         # st.write('< 선택한 컬럼 표시 >')
-    check = st.checkbox('Statistics')
+    check = st.checkbox('Total Statistics')
 
     if check :
         st.dataframe(df.describe())

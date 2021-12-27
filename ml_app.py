@@ -7,7 +7,10 @@ import time
 
 def run_ml_app():
     st.subheader('Machine Learning')
-    st.subheader('\n')
+    
+    st.write('( Google Colab을 사용했으며, 학습은 MinMaxScaler, RandomForestRegressor 사용하였습니다. )')
+    
+    st.title('\n')
 
     # 1. 유저한테, 데이터를 입력받습니다.
     rank = st.number_input('Happiness Rank : Rank of the country based on the Happiness Score.',min_value=1,max_value=158)
